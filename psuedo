@@ -1,0 +1,30 @@
+### necessary variables
+welcome_message
+historical_data_message
+quit_message
+win_message
+loss_message
+tie_message
+
+wins
+ties
+losses
+
+choice_options
+
+computer_choice
+user_choice
+For now, we will just leave these as pseudocode, but next let’s think about the functionality of the game.
+
+### procedures
+1. display welcome_message
+2. load historical_data and populate variables with data
+3. display historical_data_message with historical data
+4. prompt user to make a choice between rock, paper, scissors, or quit
+  1. if quit, update text file with current wins, ties, losses data and exit game
+  2. if not quit, move on to step 5
+5. computer makes a choice between rock, paper, and scissors
+6. compare user choice and computer choice
+7. display message based on result of comparison
+8. update wins, ties, losses appropriately
+9. return to step 4
