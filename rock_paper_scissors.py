@@ -27,7 +27,7 @@ def quit_game(wins, ties, losses):
     text_file.write(str(wins) + "," + str(ties) + "," + str(losses))
     text_file.close()
 
-def compare_choice_and_get_result(user, computer):
+def compare_choices_and_get_result(user, computer):
     if user == computer:
         return "tie"
     elif (user == "rock" and computer == "scissors") or (user == "paper" and computer == "rock") or (user == "scissors" and computer == "paper"):
@@ -75,18 +75,22 @@ choice_options = {
 computer_choice = random.randint(1,3) # use the random module imported above
 user_choice = None
 
-### procedures
-### 1. display welcome_message
-### 2. load historical_data and populate variables with data
-### 3. display historical_data_message with historical data
-### 4. prompt user to make a choice between rock, paper, scissors, or quit
-    # 4.1. if quit, update text file with current wins, ties, losses data and exit game
-    # 4.2. if not quit, move on to step 5
-### 5. computer makes a choice between rock, paper, and scissors
-### 6. compare user choice and computer choice
-### 7. display message based on result of comparison
-### 8. update wins, ties, and losses
-### 9. return to step 4
+### Start of Game
+show_welcome_message()
+show_historical_data_message()
+
+### First user choice
+user_choice = get_user_choice()
+
+### Game Loop
+while user_choice != "quit":
+    computer_choice = choice_options[random.randint(1, 3)]
+    result = compare_choices_and_get_result(user_choice, computer_choice)
+    display_result_message_and_update_score(result)
+    user_choice = get_user_choice()
+
+### Quit game if user exits game loop
+quit_game(score["wins"], score["ties"], score["losses"])
 
 
 
