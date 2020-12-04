@@ -1,13 +1,58 @@
 import random
 
+def show_welcome_message():
+    welcome_message = "Welcome to Bea's Rock, Paper, Scissors Game!"
+    print(welcome_message)
+
+def get_historical_data():
+    text_file = open("history.txt", "r")
+    text_data = text_file.read().split(",")
+    text_file.close()
+    return {
+        "wins": int(text_data[0]),
+        "ties": int(text_data[1]),
+        "losses": int(text_data[2])
+    }
+
+def show_historical_data_message():
+    print(historical_data_message %
+        (score["wins"], score["ties"], score["losses"]))
+
+def get_user_choice():
+    choice = input("[1] rock  [2] paper  [3] scissors  [9] quit\n")
+    return choice_options[int(choice)]
+
+def quit_game(wins, ties, losses):
+    text_file = open("history.txt", "w")
+    text_file.write(str(wins) + "," + str(ties) + "," + str(losses))
+    text_file.close()
+
+def compare_choice_and_get_result(user, computer):
+    if user == computer:
+        return "tie"
+    elif (user == "rock" and computer == "scissors") or (user == "paper" and computer == "rock") or (user == "scissors" and computer == "paper"):
+        return "win"
+    else: 
+        return "loss"
+
+def display_result_message_and_update_score(result):
+    if result == "tie":
+        print(tie_message)
+        score["ties"] += 1
+    elif result == "win":
+        print(win_message)
+        score["wins"] += 1
+    else:
+        print(loss_message)
+        score["losses"] += 1
+
 score = {
     "wins":0,
     "ties":0,
     "losses":0
 }
 
-# Declaring variables
-
+# Declared variables
 welcome_message = "Welcome to Bea's Rock, Paper, Scissors Game!"
 historical_data_message = "Wins: %s, Ties: %s, Losses: %s"
 quit_message = "Thanks for playing!"
@@ -15,7 +60,7 @@ win_message = "Congratulations, you win!"
 loss_message = "Sorry, maybe next time!"
 tie_message = "You win some, you lose some. In this case, it's a tie!"
 
-historical_data = # TODO: will need a function for loading historical data
+historical_data = get_historical_data()
 score["wins"] = historical_data["wins"]
 score["ties"] = historical_data["ties"]
 score["losses"] = historical_data["losses"]
@@ -27,7 +72,7 @@ choice_options = {
     9: "quit"
 }
 
-computer_choice = random.ranint(1,3) # use the random module imported above
+computer_choice = random.randint(1,3) # use the random module imported above
 user_choice = None
 
 ### procedures
@@ -43,58 +88,5 @@ user_choice = None
 ### 8. update wins, ties, and losses
 ### 9. return to step 4
 
-### 1. display welcome_message
-def show_welcome_message():
-    welcome_message = "Welcome to Bea's Rock, Paper, Scissors Game!"
-    print(welcome_message)
-
-### 2. load historical_data and populate variables with data
-def get_historical_data():
-    text_file = open("history.txt", "r")
-    text_data = text_file.read().split(",")
-    text_file.close()
-    return {
-        "wins": int(text_data[0]),
-        "ties": int(text_data[1]),
-        "losses": int(text_data[2])
-    }
-
-### 3. display historical_data_message with historical data
-def show_historical_data_message():
-    print(historical_data_message %
-        (score["wins"], score["ties"], score["losses"]))
-
-### 4. prompt user to make a choice between rock, paper, scissors, or quit
-def get_user_choice():
-    choice = input("[1] rock  [2] paper  [3] scissors  [9] quit\n")
-    return choice_options[int(choice)]
-
-def quit_game(wins, ties, losses):
-    text_file = open("history.txt", "w")
-    text_file.write(str(wins) + "," + str(ties) + "," + str(losses))
-    text_file.close()
-
-### 6. compare user choice and computer choice
-def compare_choice_and_get_result(user, computer):
-    if user == computer:
-        return "tie"
-    elif (user == "rock" and computer == "scissors") or (user == "paper" and computer == "rock") or (user == "scissors" and computer == "paper"):
-        return "win"
-    else: 
-        return "loss"
-
-### 7. display message based on result of comparison
-
-### 8. update wins, ties, and losses
-def display_result_message_and_update_score(result):
-    if result == "tie":
-        print(tie_message)
-        score["ties"] += 1
-    elif result == "win":
-        print(win_message)
-        score["wins"] += 1
-    else:
-        print(loss_message)
-        score["losses"] += 1
 
 
